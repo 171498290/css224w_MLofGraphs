@@ -9,7 +9,7 @@ c4 = np.array([0,1,2,0])
 adjM = np.row_stack([c1,c2,c3,c4])
 
 # 定义一个修改有限队列的函数
-def Modify(PQ, element, elementVal):
+def Modify(PQ, elementVal, element):
     '''
     Desc:
         修改优先队列中元素的值
@@ -31,11 +31,11 @@ def Modify(PQ, element, elementVal):
 def TPSPDijkstra(graph, nStart, nEnd):
     '''
     Desc:
-        获取开始节点和被查找节点之间的最短路径
+        获取开始节点和目标节点之间的最短路径
     Para:
         graph: 图的邻接矩阵
         nStart: 开始节点的索引
-        nEnd: 需要被查找的节点的索引
+        nEnd: 目标节点的索引
     Return:
     '''
     # 初始化优先队列
@@ -64,7 +64,7 @@ def TPSPDijkstra(graph, nStart, nEnd):
                     if (v, _d[v]) not in PQ.queue:
                         PQ.put((_d[v], v))
                     else:
-                        Modify(PQ, v, _d[v])
+                        Modify(PQ, _d[v], v)
 
     # 如果一直没有找到最短距离, 则返回inf
     return np.inf
